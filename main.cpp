@@ -3,10 +3,12 @@
 #include <string>
 #include <vector>
 
+char delimiter = ',';
+
 struct Student {
     std::string fullName;
     int course;
-    std::string faculty;
+    std::string faculty;       
     double gradePointAverage;
     int age;
 };
@@ -19,94 +21,94 @@ void loadStudents(std::vector<Student>& students) {
             students.push_back(student);
         }
         file.close();
-        std::cout << "Студенты загружены из файла." << std::endl;
+        std::cout << "Students uploaded from a file." << std::endl;
     } else {
-        std::cout << "Ошибка открытия файла." << std::endl;
+        std::cout << "File opening error." << std::endl;
     }
 }
 
 void displayStudents(const std::vector<Student>& students) {
     if (students.empty()) {
-        std::cout << "Студенты не найдены." << std::endl;
+        std::cout << "No students found." << std::endl;
         return;
     }
 
-    std::cout << "Список студентов:" << std::endl;
+    std::cout << "List of students:" << std::endl;
     for (const auto& student : students) {
-        std::cout << "Полное имя: " << student.fullName << ", Курс: " << student.course
-                  << ", Факультет: " << student.faculty << ", Средний балл: " << student.gradePointAverage
-                  << ", Возраст: " << student.age << std::endl;
+        std::cout << "Full name: " << student.fullName << ", Course: " << student.course
+                  << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
+                  << ", Age: " << student.age << std::endl;
     }
 }
 
 void searchStudents(const std::vector<Student>& students) {
     std::string searchField;
-    std::cout << "Введите поле для поиска (fullName, course, faculty, gradePointAverage, age): ";
+    std::cout << "Enter the search field (fullName, course, faculty, gradePointAverage, age): ";
     std::cin >> searchField;
 
     bool found = false;
     for (const auto& student : students) {
         if (searchField == "fullName" && student.fullName == searchField) {
-            std::cout << "Полное имя: " << student.fullName << ", Курс: " << student.course
-                      << ", Факультет: " << student.faculty << ", Средний балл: " << student.gradePointAverage
-                      << ", Возраст: " << student.age << std::endl;
+            std::cout << "Fuul name: " << student.fullName << ", Course: " << student.course
+                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
+                      << ", age: " << student.age << std::endl;
             found = true;
         } else if (searchField == "course" && std::to_string(student.course) == searchField) {
-            std::cout << "Полное имя: " << student.fullName << ", Курс: " << student.course
-                      << ", Факультет: " << student.faculty << ", Средний балл: " << student.gradePointAverage
-                      << ", Возраст: " << student.age << std::endl;
+            std::cout << "Full name: " << student.fullName << ", Course: " << student.course
+                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
+                      << ", age: " << student.age << std::endl;
             found = true;
         } else if (searchField == "faculty" && student.faculty == searchField) {
-            std::cout << "Полное имя: " << student.fullName << ", Курс: " << student.course
-                      << ", Факультет: " << student.faculty << ", Средний балл: " << student.gradePointAverage
-                      << ", Возраст: " << student.age << std::endl;
+            std::cout << "Full name: " << student.fullName << ", Course: " << student.course
+                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
+                      << ", age: " << student.age << std::endl;
             found = true;
         } else if (searchField == "gradePointAverage" && std::to_string(student.gradePointAverage) == searchField) {
-            std::cout << "Полное имя: " << student.fullName << ", Курс: " << student.course
-                      << ", Факультет: " << student.faculty << ", Средний балл: " << student.gradePointAverage
-                      << ", Возраст: " << student.age << std::endl;
+            std::cout << "Full name: " << student.fullName << ", Course: " << student.course
+                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
+                      << ", age: " << student.age << std::endl;
             found = true;
         } else if (searchField == "age" && std::to_string(student.age) == searchField) {
-            std::cout << "Полное имя: " << student.fullName << ", Курс: " << student.course
-                      << ", Факультет: " << student.faculty << ", Средний балл: " << student.gradePointAverage
-                      << ", Возраст: " << student.age << std::endl;
+            std::cout << "Full name: " << student.fullName << ", Course: " << student.course
+                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
+                      << ", age: " << student.age << std::endl;
             found = true;
         }
     }
 
     if (!found) {
-        std::cout << "Студенты с указанным значением поля не найдены." << std::endl;
+        std::cout << "Students with the specified field value were not found." << std::endl;
     }
 }
 void addStudent(std::vector<Student>& students) {
     Student newStudent;
-    std::cout << "Введите информацию о студенте:" << std::endl;
-    std::cout << "Полное имя: ";
+    std::cout << "Enter the information about the student:" << std::endl;
+    std::cout << "Full name: ";
     std::getline(std::cin >> std::ws, newStudent.fullName);
-    std::cout << "Курс: ";
+    std::cout << "Course: ";
     std::cin >> newStudent.course;
-    std::cout << "Факультет: ";
+    std::cout << "Faculty: ";
     std::getline(std::cin >> std::ws, newStudent.faculty);
-    std::cout << "Средний балл: ";
+    std::cout << "Grade Point Average: ";
     std::cin >> newStudent.gradePointAverage;
-    std::cout << "Возраст: ";
+    std::cout << "Age: ";
     std::cin >> newStudent.age;
     students.push_back(newStudent);
-    std::cout << "Новый студент добавлен." << std::endl;
+    std::cout << "A new student has been added." << std::endl;
 }
 
 void deleteStudent(std::vector<Student>& students) {
     int index;
-    std::cout << "Введите индекс студента для удаления: ";
+    std::cout << "Enter the student's index to delete: ";
     std::cin >> index;
 
     if (index < 0 || index >= students.size()) {
-        std::cout << "Неверный индекс." << std::endl;
+        std::cout << "Invalid index." << std::endl;
         return;
     }
 
     students.erase(students.begin() + index);
-    std::cout << "Студент удален." << std::endl;
+    std::cout << "The student has been removed." << std::endl;
 }
 
 void saveStudents(const std::vector<Student>& students) {
@@ -117,9 +119,9 @@ void saveStudents(const std::vector<Student>& students) {
                  << student.gradePointAverage << " " << student.age << std::endl;
         }
         file.close();
-        std::cout << "Студенты сохранены в файл." << std::endl;
+        std::cout << "The students are saved to a file." << std::endl;
     } else {
-        std::cout << "Ошибка открытия файла." << std::endl;
+        std::cout << "Error opening the file." << std::endl;
     }
 }
 
@@ -128,15 +130,15 @@ int main() {
     int choice;
 
     while (true) {
-        std::cout << "Меню управления студентами:" << std::endl;
-        std::cout << "1. Загрузить студентов" << std::endl;
-        std::cout << "2. Отобразить студентов" << std::endl;
-        std::cout << "3. Поиск студентов" << std::endl;
-        std::cout << "4. Добавить студента" << std::endl;
-        std::cout << "5. Удалить студента" << std::endl;
-        std::cout << "6. Сохранить студентов" << std::endl;
-        std::cout << "7. Выйти" << std::endl;
-        std::cout << "Введите ваш выбор: ";
+        std::cout << "Student Management Menu:" << std::endl;
+        std::cout << "1. Upload students" << std::endl;
+        std::cout << "2. Display students" << std::endl;
+        std::cout << "3. Student Search" << std::endl;
+        std::cout << "4. Add a student" << std::endl;
+        std::cout << "5. Delete a student" << std::endl;
+        std::cout << "6. Save students" << std::endl;
+        std::cout << "7. Exit" << std::endl;
+        std::cout << "Enter your choice: ";
         std::cin >> choice;
 
         switch (choice) {
@@ -159,10 +161,10 @@ int main() {
                 saveStudents(students);
                 break;
             case 7:
-                std::cout << "Выход из программы..." << std::endl;
+                std::cout << "Exit the program..." << std::endl;
                 return 0;
             default:
-                std::cout << "Неверный выбор. Попробуйте еще раз." << std::endl;
+                std::cout << "Wrong choice. Try again." << std::endl;
                 break;
         }
     }
