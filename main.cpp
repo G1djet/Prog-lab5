@@ -3,8 +3,10 @@
 #include <string>
 #include <vector>
 
-char delimiter = ',';
-
+/**
+ * @struct Student
+ * @brief Структура, представляющая информацию о студенте.
+ */
 struct Student {
     std::string fullName;
     int course;
@@ -13,6 +15,10 @@ struct Student {
     int age;
 };
 
+/**
+ * @brief Загружает информацию о студентах из файла в вектор.
+ * @param students Вектор, в который будет загружена информация о студентах.
+ */
 void loadStudents(std::vector<Student>& students) {
     std::ifstream file("students.txt");
     if (file.is_open()) {
@@ -27,6 +33,9 @@ void loadStudents(std::vector<Student>& students) {
     }
 }
 
+/**
+ * @brief Отображает информацию о всех студентах из вектора.
+ */
 void displayStudents(const std::vector<Student>& students) {
     if (students.empty()) {
         std::cout << "No students found." << std::endl;
@@ -41,45 +50,45 @@ void displayStudents(const std::vector<Student>& students) {
     }
 }
 
+/**
+ * @brief Выполняет поиск студента по заданному критерию.
+ */
 void searchStudents(const std::vector<Student>& students) {
     std::string searchField;
     std::cout << "Enter the search field (fullName, course, faculty, gradePointAverage, age): ";
     std::cin >> searchField;
 
+    std::string searchValue;
+    std::cout << "Enter the search value: ";
+    std::cin >> searchValue;
+
     bool found = false;
     for (const auto& student : students) {
-        if (searchField == "fullName" && student.fullName == searchField) {
-            std::cout << "Fuul name: " << student.fullName << ", Course: " << student.course
-                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
-                      << ", age: " << student.age << std::endl;
-            found = true;
-        } else if (searchField == "course" && std::to_string(student.course) == searchField) {
+        if ((searchField == "fullName" && student.fullName == searchValue) ||
+            (searchField == "course" && std::to_string(student.course) == searchValue) ||
+            (searchField == "faculty" && student.faculty == searchValue) ||
+            (searchField == "gradePointAverage" && std::to_string(student.gradePointAverage) == searchValue) ||
+            (searchField == "age" && std::to_string(student.age) == searchValue)) {
+            
+            std::cout << "Student found:" << std::endl;
             std::cout << "Full name: " << student.fullName << ", Course: " << student.course
                       << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
-                      << ", age: " << student.age << std::endl;
+                      << ", Age: " << student.age << std::endl;
+            
             found = true;
-        } else if (searchField == "faculty" && student.faculty == searchField) {
-            std::cout << "Full name: " << student.fullName << ", Course: " << student.course
-                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
-                      << ", age: " << student.age << std::endl;
-            found = true;
-        } else if (searchField == "gradePointAverage" && std::to_string(student.gradePointAverage) == searchField) {
-            std::cout << "Full name: " << student.fullName << ", Course: " << student.course
-                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
-                      << ", age: " << student.age << std::endl;
-            found = true;
-        } else if (searchField == "age" && std::to_string(student.age) == searchField) {
-            std::cout << "Full name: " << student.fullName << ", Course: " << student.course
-                      << ", Faculty: " << student.faculty << ", Grade Point Average: " << student.gradePointAverage
-                      << ", age: " << student.age << std::endl;
-            found = true;
+            break; 
         }
     }
 
     if (!found) {
-        std::cout << "Students with the specified field value were not found." << std::endl;
+        std::cout << "No student found with the specified field value." << std::endl;
     }
 }
+
+/**
+ * @brief Добавляет информацию о новом студенте в вектор.
+ * @param students Вектор, в который будет добавлена информация о студенте.
+ */
 void addStudent(std::vector<Student>& students) {
     Student newStudent;
     std::cout << "Enter the information about the student:" << std::endl;
@@ -97,6 +106,9 @@ void addStudent(std::vector<Student>& students) {
     std::cout << "A new student has been added." << std::endl;
 }
 
+/**
+ * @brief Удаляет информацию о студенте из вектора по индексу.
+ */
 void deleteStudent(std::vector<Student>& students) {
     int index;
     std::cout << "Enter the student's index to delete: ";
@@ -111,6 +123,9 @@ void deleteStudent(std::vector<Student>& students) {
     std::cout << "The student has been removed." << std::endl;
 }
 
+/**
+ * @brief Сохраняет информацию о студентах из вектора в файл "students.txt".
+ */
 void saveStudents(const std::vector<Student>& students) {
     std::ofstream file("students.txt");
     if (file.is_open()) {
@@ -125,6 +140,9 @@ void saveStudents(const std::vector<Student>& students) {
     }
 }
 
+/**
+ * @brief Основная функция программы. Предоставляет меню для управления информацией о студентах.
+ */
 int main() {
     std::vector<Student> students;
     int choice;

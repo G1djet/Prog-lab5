@@ -1,1 +1,7 @@
-Max Brown 1 Art 3.2 19
+Ivanov 1 Math 3.2 19
+Smirnov 3 Art 3.8 21
+Kuznetsova 1 Economics 3.5 18
+Volkov 2 Biology 4.2 19
+Romanova 3 History 3.7 20
+Sokolov 1 Engineering 3.9 19
+Agapov 3 Math 4.1 21
